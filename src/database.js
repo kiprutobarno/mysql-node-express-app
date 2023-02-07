@@ -10,17 +10,17 @@ const pool = mysql
   })
   .promise();
 
-export const getNotes = async () => {
+const getNotes = async () => {
   const [rows] = await pool.query("SELECT * FROM notes");
   return rows;
-};
+};babel-node
 
-export const getNote = async (id) => {
+const getNote = async (id) => {
   const [row] = await pool.query("SELECT * FROM notes WHERE id = ?", [id]);
   return row[0];
 };
 
-export const createNote = async (title, content) => {
+const createNote = async (title, content) => {
   const [result] = await pool.query(
     "INSERT INTO notes(title, contents) VALUES(?, ?) ",
     [title, content]
@@ -28,3 +28,7 @@ export const createNote = async (title, content) => {
   const id = result.insertId;
   return getNote(id);
 };
+
+const db = { createNote, getNote, getNotes };
+
+export default db;
