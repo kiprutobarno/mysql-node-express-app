@@ -13,7 +13,7 @@ const pool = mysql
 const getNotes = async () => {
   const [rows] = await pool.query("SELECT * FROM notes");
   return rows;
-};babel-node
+};
 
 const getNote = async (id) => {
   const [row] = await pool.query("SELECT * FROM notes WHERE id = ?", [id]);
